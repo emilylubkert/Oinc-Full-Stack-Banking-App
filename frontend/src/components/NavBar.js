@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/Auth/authContext';
 import '../components.css';
 
 function NavBar() {
-  const auth = useAuth();
+  const { auth, logout} = useAuth();
 
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
@@ -56,7 +56,7 @@ function NavBar() {
               </NavLink>
             </li>
             <li className='nav-item'>
-              {!auth.user ? (
+              {!auth ? (
                 <NavLink
                   className='nav-NavLink'
                   to='/login'
@@ -72,7 +72,7 @@ function NavBar() {
               ) : (
                 <NavLink
                   className='nav-NavLink'
-                  onClick={auth.signout}
+                  onClick={logout}
                   to='/'
                   className={({ isActive }) =>
                     isActive ? 'active-style' : 'none'

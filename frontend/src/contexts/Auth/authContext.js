@@ -22,8 +22,8 @@ function AuthProvider({ children }) {
                 console.log('token', token)
             })
             setAuth(user);
-            auth.balance = 10;
-            navigate('/dashboard');
+            // auth.balance = 10;
+            // navigate('/dashboard');
 
         } catch (error){
             console.log(error)
@@ -40,8 +40,8 @@ function AuthProvider({ children }) {
                 localStorage.setItem('token', token)
             })
             setAuth(user);
-            auth.balance = 10;
-            navigate('/dashboard');
+            // auth.balance = 10;
+            // navigate('/dashboard');
 
         } catch (error){
             console.log(error);
