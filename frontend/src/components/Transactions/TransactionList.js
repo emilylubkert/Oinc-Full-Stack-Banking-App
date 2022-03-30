@@ -1,4 +1,4 @@
-import '../../components.css'
+import '../../components.css';
 
 const TransactionList = ({ transactions }) => {
     const newRow = transactions.map((item, index) => {

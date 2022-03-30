@@ -1,8 +1,8 @@
-import Card from './Card';
 import { Link } from 'react-router-dom';
-import '../components.css';
+import Card from '../Card';
 import ContactButton from './ContactButton';
 import Logo from './Logo';
+import '../../components.css';
 
 function Home() {
   return (

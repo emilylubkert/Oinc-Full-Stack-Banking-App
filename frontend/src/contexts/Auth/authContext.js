@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from 'react';
-import firebase from './firebaseConfig';
 import { navigate, useNavigate } from 'react-router-dom';
-
+import firebase from './firebaseConfig';
 import useProvideAuth from '../../hooks/useProvideAuth';
 import { usersAPI } from '../../services/index';
 

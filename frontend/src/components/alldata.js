@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useUsers } from '../contexts/userContext';
 import { useAuth } from '../contexts/Auth/authContext';
-import Card from './Card';
 import { usersAPI } from '../services/index';
+import Card from './Card';
 import '../components.css';
 
 function AllData() {

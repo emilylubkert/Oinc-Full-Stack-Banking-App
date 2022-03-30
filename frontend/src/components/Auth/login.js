@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import Card from '../Card';
-import ContactButton from '../ContactButton';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../contexts/Auth/authContext';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import Logo from '../Logo';
-import '../../components.css';
+import { useAuth } from '../../contexts/Auth/authContext';
+import Card from '../Card';
+import ContactButton from '../Home/ContactButton';
+import Logo from '../Home/Logo';
 import useProvideAuth from '../../hooks/useProvideAuth';
-
+import '../../components.css';
 
 function Login() {
   const { auth, login, logout } = useAuth();

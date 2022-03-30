@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Card from '../Card';
-import { useUsers } from '../../contexts/userContext';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useAuth  } from '../../contexts/Auth/authContext';
+import { useUsers } from '../../contexts/userContext';
+import { useAuth } from '../../contexts/Auth/authContext';
+import ContactButton from '../Home/ContactButton';
+import Logo from '../Home/Logo';
+import Card from '../Card';
 import '../../components.css';
-import ContactButton from '../ContactButton';
-import Logo from '../Logo';
-
 
 function CreateAccount() {
   const ctx = useUsers();
@@ -28,7 +27,11 @@ function CreateAccount() {
     return (
       <Formik
         validateOnMount
-        initialValues={{ name: 'Chris', email: 'chris@duke.edu', password: '12345678' }}
+        initialValues={{
+          name: 'Chris',
+          email: 'chris@duke.edu',
+          password: '12345678',
+        }}
         validationSchema={Yup.object({
           name: Yup.string().required('Required'),
           email: Yup.string()
@@ -39,7 +42,7 @@ function CreateAccount() {
             .required('Required'),
         })}
         onSubmit={async (values, { setSubmitting }) => {
-          signup(values.name, values.email, values.password); 
+          signup(values.name, values.email, values.password);
           setShow(false);
           setSubmitting(false);
         }}

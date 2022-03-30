@@ -5,15 +5,15 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Transactions/dashboard';
 import CreateAccount from './components/Auth/createaccount';
 import Deposit from './components/Transactions/deposit';
-import Home from './components/home';
+import Home from './components/Home/Home';
 import NavBar from './components/NavBar';
 import Login from './components/Auth/login';
 import Withdraw from './components/Transactions/withdraw';
-import AllData from './components/alldata';
+import AllData from './components/Alldata';
 import RequireAuth from './components/Auth/RequireAuth';
 import { AuthProvider } from './contexts/Auth/authContext';
 import { UserProvider } from './contexts/userContext';
-import Contact from './components/contact';
+import Contact from './components/Home/Contact';
 
 function App() {
   const [data, setData] = useState(null);

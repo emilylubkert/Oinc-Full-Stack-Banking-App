@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import Card from '../Card'
-import TransactionList from './TransactionList';
 import { useAuth } from '../../contexts/Auth/authContext'
 import { usersAPI, transactionsAPI } from '../../services/index.js';
-import ContactButton from '../ContactButton';
+import Card from '../Card'
+import TransactionList from './TransactionList';
+import ContactButton from '../Home/ContactButton';
 import '../../components.css'
 
 function Dashboard() {
