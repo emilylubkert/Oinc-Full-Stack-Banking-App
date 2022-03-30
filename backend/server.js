@@ -8,13 +8,18 @@ const authMiddleware = require('./middleware/auth');
 
 const Transaction = require('./models/Transaction');
 const User = require('./models/User');
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+  ],
+}
 
 const app = express();
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(authMiddleware);
+
 
 // const buildPath = path.normalize(path.join(__dirname, '../frontend/build'));
 // app.use(express.static(buildPath));
@@ -32,13 +37,13 @@ try {
 //create user
 app.post('/account/create', async (req, res) => {
   console.log('request body', req.body);
-  const { name, email, password } = req.body;
+  const { name, email, password, firebaseID } = req.body;
   const user = {
     name,
     email,
     password,
     balance: 10,
-    firebaseID: req.firebaseUser.uid,
+    firebaseID
   };
   try {
     const newUser = await User.create(user);
@@ -47,6 +52,9 @@ app.post('/account/create', async (req, res) => {
     console.log(error);
   }
 });
+
+app.use(authMiddleware);
+
 //get all accounts
 app.get('/account/all', async (req, res) => {
   try {
@@ -57,25 +65,11 @@ app.get('/account/all', async (req, res) => {
   }
 });
 
-//get users balance
-app.get('/transactions/balance'), async (req, res) => {
-  try {
-    // const userBalance = await Transaction
-    // .find({firebaseID: req.firebaseUser.uid})
-    // .sort({ _id: -1 })
-    // .limit(1);
-    const userBalance = 10;
-    res.send(userBalance);
-    console.log(userBalance)
-  } catch (error) {
-    res.status(404).json({ message: 'Bad request' });
-  }
-}
 //dashboard - get users transactions
 app.get('/transactions/all', async (req, res) => {
   try {
     const transactions = await Transaction.find({
-      firebaseID: req.firebaseUser.uid,
+      firebaseID: req.firebaseUser.uid
     });
     res.status(200).send(transactions);
   } catch (error) {
@@ -91,12 +85,20 @@ app.post('/transactions/deposit', async (req, res) => {
     amount,
     type: 'Deposit',
     balance,
-    firebaseID: req.firebaseUser.uid,
+    firebaseID: req.firebaseUser.uid
   };
   try {
     console.log('deposit', deposit);
     const newDeposit = await Transaction.create(deposit);
-    res.status(201).json(newDeposit);
+    //update balance in user - fetch latest balance and update here
+    const targetUser = {firebaseID: req.firebaseUser.uid}
+    console.log('targetUser', targetUser)
+    const newBalance = {balance: deposit.balance}
+    console.log('newBalance', newBalance)
+    const updateBalance = await User.findOneAndUpdate(targetUser, newBalance, {
+      new: true
+    })
+    res.status(201).json({newDeposit, updateBalance});
   } catch (error) {
     console.log(error);
   }

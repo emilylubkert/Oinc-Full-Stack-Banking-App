@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/Auth/authContext';
 import '../components.css';
 
 function NavBar() {
-  const { auth, logout} = useAuth();
+  const { auth, logout } = useAuth();
 
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
@@ -13,10 +13,11 @@ function NavBar() {
     <>
       <nav className='navbar navbar-expand-lg navbar-light'>
         <NavLink
-          className='navbar-brand'
+          className={({ isActive }) =>
+            (isActive ? 'active-style' : 'none') + 'navbar-brand'
+          }
           exact='true'
           to='/'
-          className={({ isActive }) => (isActive ? 'active-style' : 'none')}
           data-toggle='tooltip'
           data-placement='top'
           title='Return to home page'
@@ -43,11 +44,10 @@ function NavBar() {
           <ul className='navbar-nav'>
             <li className='nav-item'>
               <NavLink
-                className='nav-NavLink'
-                to='/createaccount'
                 className={({ isActive }) =>
-                  isActive ? 'active-style' : 'none'
+                  isActive ? 'active-style' : 'none' + 'nav-NavLink'
                 }
+                to='/createaccount'
                 data-toggle='tooltip'
                 data-placement='top'
                 title='Make a new account'
@@ -58,11 +58,10 @@ function NavBar() {
             <li className='nav-item'>
               {!auth ? (
                 <NavLink
-                  className='nav-NavLink'
-                  to='/login'
                   className={({ isActive }) =>
-                    isActive ? 'active-style' : 'none'
+                    isActive ? 'active-style' : 'none' + 'nav-NavLink'
                   }
+                  to='/login'
                   data-toggle='tooltip'
                   data-placement='top'
                   title='Log in to your account'
@@ -71,12 +70,11 @@ function NavBar() {
                 </NavLink>
               ) : (
                 <NavLink
-                  className='nav-NavLink'
+                  className={({ isActive }) =>
+                    isActive ? 'active-style' : 'none' + 'nav-NavLink'
+                  }
                   onClick={logout}
                   to='/'
-                  className={({ isActive }) =>
-                    isActive ? 'active-style' : 'none'
-                  }
                   data-toggle='tooltip'
                   data-placement='top'
                   title='Log out of your account'
@@ -87,11 +85,10 @@ function NavBar() {
             </li>
             <li className='nav-item'>
               <NavLink
-                className='nav-NavLink'
-                to='/dashboard'
                 className={({ isActive }) =>
-                  isActive ? 'active-style' : 'none'
+                  isActive ? 'active-style' : 'none' + 'nav-NavLink'
                 }
+                to='/dashboard'
                 data-toggle='tooltip'
                 data-placement='top'
                 title='View recent transactions'
@@ -101,11 +98,10 @@ function NavBar() {
             </li>
             <li className='nav-item'>
               <NavLink
-                className='nav-NavLink'
-                to='/deposit'
                 className={({ isActive }) =>
-                  isActive ? 'active-style' : 'none'
+                  isActive ? 'active-style' : 'none' + 'nav-NavLink'
                 }
+                to='/deposit'
                 data-toggle='tooltip'
                 data-placement='top'
                 title='Make a deposit'
@@ -115,11 +111,10 @@ function NavBar() {
             </li>
             <li className='nav-item'>
               <NavLink
-                className='nav-NavLink'
-                to='/withdraw'
                 className={({ isActive }) =>
-                  isActive ? 'active-style' : 'none'
+                  isActive ? 'active-style' : 'none' + 'nav-NavLink'
                 }
+                to='/withdraw'
                 data-toggle='tooltip'
                 data-placement='top'
                 title='Withdraw funds'
@@ -130,11 +125,10 @@ function NavBar() {
 
             <li className='nav-item'>
               <NavLink
-                className='nav-NavLink'
-                to='/alldata'
                 className={({ isActive }) =>
-                  isActive ? 'active-style' : 'none'
+                  isActive ? 'active-style' : 'none' + 'nav-NavLink'
                 }
+                to='/alldata'
                 data-toggle='tooltip'
                 data-placement='top'
                 title='View user data'

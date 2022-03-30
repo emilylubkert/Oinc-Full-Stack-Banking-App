@@ -11,17 +11,19 @@ function AuthProvider({ children }) {
     const [auth, setAuth] = useState(null);
     const navigate = useNavigate();
 
-    const signup = async (email, password) => {
+    const signup = async (name, email, password) => {
         try {
             const userCredential = await firebase.signup(email, password)
             console.log('userCredential', userCredential);
             const { user } = userCredential;
+            const firebaseID = user.uid;
 
             user.getIdToken().then(token => {
                 localStorage.setItem('token', token)
                 console.log('token', token)
             })
             setAuth(user);
+            usersAPI.new({name, email, password, firebaseID}); 
             // auth.balance = 10;
             // navigate('/dashboard');
 

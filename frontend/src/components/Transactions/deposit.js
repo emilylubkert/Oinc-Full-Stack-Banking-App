@@ -40,8 +40,10 @@ function Deposit() {
     setCurrentBalance(newBalance);
     console.log('current balance', newBalance)
     saveTransaction(newBalance);
+    const { data } = await transactionsAPI.deposit(date, deposit, newBalance)
     await getTransactions();
-    await transactionsAPI.deposit(date, deposit, newBalance)
+    setCurrentBalance(data.updateBalance.balance);
+    
 
     setShow(false);
     setDeposit('');
@@ -82,7 +84,7 @@ function Deposit() {
         bgcolor='light'
         txtcolor='black'
         header='Make A Deposit'
-        title={`Your balance is $${auth.balance}.`}
+        title={`Your balance is $${currentBalance}.`}
         body={
           show ? (
             <>

@@ -18,13 +18,6 @@ import Contact from './components/contact';
 function App() {
   const [data, setData] = useState(null);
 
-  // const callbackendAPI = async () => {
-  //   await fetch('/express_backend')
-  //   .then((res) => res.json())
-  //   .then((res) => console.log(res.message));}
-
-  // useEffect(() => callbackendAPI(), []);
-
   return (
     <Router>
       <UserProvider>

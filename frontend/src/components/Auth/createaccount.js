@@ -9,7 +9,6 @@ import '../../components.css';
 import ContactButton from '../ContactButton';
 import Logo from '../Logo';
 
-import { usersAPI } from '../../services/index'
 
 function CreateAccount() {
   const ctx = useUsers();
@@ -40,25 +39,9 @@ function CreateAccount() {
             .required('Required'),
         })}
         onSubmit={async (values, { setSubmitting }) => {
-          signup(values.email, values.password);
-          usersAPI.new(values);          
+          signup(values.name, values.email, values.password); 
           setShow(false);
           setSubmitting(false);
-          // let newUser = {
-          //   name: values.name,
-          //   email: values.email,
-          //   password: values.password,
-          //   balance: 10,
-          //   transactions: [
-          //     {
-          //       date: `${date}`,
-          //       amount: `$10`,
-          //       type: 'Sign Up Credit',
-          //       balance: `$10`,
-          //     },
-          //   ],
-          // };
-          // ctx.users.push(newUser);
         }}
       >
         {({ isSubmitting, isValid }) => (
@@ -142,10 +125,10 @@ function CreateAccount() {
                   className='btn btn-dark'
                   onClick={clearForm}
                 >
-                  Add another account
+                  Add Another Account
                 </button>
-                <Link className='btn btn-dark' role='button' to='../login'>
-                  Log In
+                <Link className='btn btn-dark' role='button' to='../dashboard'>
+                  Go To Dashboard
                 </Link>
               </div>
             </>

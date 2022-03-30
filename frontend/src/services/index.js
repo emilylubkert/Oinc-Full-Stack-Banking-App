@@ -27,6 +27,7 @@ const usersAPI = {
       name: data.name,
       email: data.email,
       password: data.password,
+      firebaseID: data.firebaseID,
     }),
   //show all accounts
   all: () => service.get('/account/all'),
