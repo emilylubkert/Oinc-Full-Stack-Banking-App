@@ -77,6 +77,18 @@ app.get('/transactions/all', async (req, res) => {
   }
 });
 
+//get balance
+app.get('/transactions/balance/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const targetUser = await User.findOne({firebaseID: id})
+    res.status(200).json(targetUser)
+  }
+  catch (error){
+    console.log(error)
+  }
+})
+
 // deposit
 app.post('/transactions/deposit', async (req, res) => {
   const { date, amount, balance } = req.body;
@@ -90,7 +102,6 @@ app.post('/transactions/deposit', async (req, res) => {
   try {
     console.log('deposit', deposit);
     const newDeposit = await Transaction.create(deposit);
-    //update balance in user - fetch latest balance and update here
     const targetUser = {firebaseID: req.firebaseUser.uid}
     console.log('targetUser', targetUser)
     const newBalance = {balance: deposit.balance}
@@ -117,7 +128,14 @@ app.post('/transactions/withdraw', async (req, res) => {
   try {
     console.log('withdraw', withdraw);
     const newWithdraw = await Transaction.create(withdraw);
-    res.status(201).json(newWithdraw);
+    const targetUser = {firebaseID: req.firebaseUser.uid}
+    console.log('targetUser', targetUser)
+    const newBalance = {balance: withdraw.balance}
+    console.log('newBalance', newBalance)
+    const updateBalance = await User.findOneAndUpdate(targetUser, newBalance, {
+      new: true
+    })
+    res.status(201).json({newWithdraw, updateBalance});
   } catch (error) {
     console.log(error);
   }

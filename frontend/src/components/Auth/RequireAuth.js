@@ -4,10 +4,10 @@ import { useAuth } from '../../contexts/Auth/authContext'
 
 
 function RequireAuth() {
-    let auth = useAuth();
+    const auth = useAuth();
     let location = useLocation();
 
-    if (!auth){
+    if (!auth.auth){
         return <Navigate to='/' state={{ from: location}} />
     }
     return <Outlet />;

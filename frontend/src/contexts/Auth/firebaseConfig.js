@@ -4,8 +4,7 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     signOut,
-    onAuthStateChanged,
-    updateProfile
+    onAuthStateChanged
 } from 'firebase/auth'
  
 const firebaseConfig = {
@@ -20,14 +19,16 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+// console.log('firebase auth', auth)
 const user = auth.currentUser;
+
 
 const firebase = {
     signup: (email, password) => createUserWithEmailAndPassword(auth, email, password)
-    // .then(updateProfile(user, { displayName: document.getElementById('name').value}))
     .then(console.log('current user', user)),
     login: (email, password) => signInWithEmailAndPassword(auth, email, password),
-    logout: () => signOut(auth)
+    logout: () => signOut(auth),
+    getCurrentUser: callback => onAuthStateChanged(auth, user => callback(user))
 }
 
 export default firebase;

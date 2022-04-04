@@ -10,9 +10,26 @@ function Deposit() {
   const auth = useAuth();
   const [show, setShow] = useState(true);
   const [deposit, setDeposit] = useState('');
-  const [currentBalance, setCurrentBalance] = useState(10);
+  const [currentBalance, setCurrentBalance] = useState('loading');
   const [isValid, setIsValid] = useState(false);
   const [transactions, setTransactions] = useState([])
+
+  const getTransactions =  async () => {
+    const response = await transactionsAPI.all();
+    console.log('get API response',response.data);
+    setTransactions(response.data);
+  }
+
+  const getBalance = async () => {
+    const response = await transactionsAPI.balance(auth.auth.uid);
+    console.log('get balance', response.data)
+    setCurrentBalance(response.data.balance)
+  }
+
+  useEffect(() => {
+    getTransactions(); 
+    getBalance()
+  }, [])
 
   let today = new Date();
   let date = `${
@@ -39,10 +56,11 @@ function Deposit() {
     // auth.balance = newBalance;
     setCurrentBalance(newBalance);
     console.log('current balance', newBalance)
-    saveTransaction(newBalance);
-    const { data } = await transactionsAPI.deposit(date, deposit, newBalance)
+    // saveTransaction(newBalance);
+    const response = await transactionsAPI.deposit(date, deposit, newBalance);
+    console.log(response);
+    setCurrentBalance(response.data.updateBalance.balance)
     await getTransactions();
-    setCurrentBalance(data.updateBalance.balance);
     
 
     setShow(false);
@@ -55,27 +73,19 @@ function Deposit() {
     setShow(true);
   }
 
-  function saveTransaction(total) {
+  // function saveTransaction(total) {
 
-    let newTransaction = {
-      date: `${date}`,
-      amount: `$${deposit}`,
-      // type: 'Deposit',
-      balance: `$${total}`,
-    };
-    transactions.push(newTransaction);
+  //   let newTransaction = {
+  //     date: `${date}`,
+  //     amount: `$${deposit}`,
+  //     // type: 'Deposit',
+  //     balance: `$${total}`,
+  //   };
+  //   transactions.push(newTransaction);
     
-  }
+  // }
 
-  const getTransactions =  async () => {
-    const response = await transactionsAPI.all();
-    console.log(response.data);
-    setTransactions(response.data);
-  }
 
-  useEffect(() => {
-    getTransactions()
-  }, [])
 
   return (
     <>

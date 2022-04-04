@@ -34,7 +34,6 @@ function NavBar() {
           aria-label='Toggle navigation'
           onClick={handleNavCollapse}
         >
-          {' '}
           <span className='navbar-toggler-icon'></span>
         </button>
         <div

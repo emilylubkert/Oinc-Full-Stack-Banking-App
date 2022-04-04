@@ -13,6 +13,7 @@ import AllData from './components/Alldata';
 import RequireAuth from './components/Auth/RequireAuth';
 import { AuthProvider } from './contexts/Auth/authContext';
 import { UserProvider } from './contexts/userContext';
+import { AuthStateChanged } from './components/Auth/AuthStateChanged';
 import Contact from './components/Home/Contact';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
     <Router>
       <UserProvider>
         <AuthProvider>
+          <AuthStateChanged>
           <NavBar />
           <div className='container' style={{ padding: '20px' }}>
             <Routes>
@@ -30,16 +32,19 @@ function App() {
               <Route path='/login/' element={<Login />} />
               <Route path='*' exact element={<h4>Page Not Found</h4>} />
               <Route path='/contact/' element={<Contact />} />
+
               <Route element={<RequireAuth />}>
                 <Route path='/dashboard/' element={<Dashboard />} />
                 <Route path='/deposit/' element={<Deposit />} />
                 <Route path='/withdraw/' element={<Withdraw />} />
                 <Route path='/alldata/' element={<AllData />} />
               </Route>
+
             </Routes>
           </div>
+          </AuthStateChanged>
         </AuthProvider>
-      </UserProvider>{' '}
+      </UserProvider>
     </Router>
   );
 }

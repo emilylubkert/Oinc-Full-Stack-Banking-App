@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/Auth/authContext';
+import { transactionsAPI } from '../../services';
 import Card from '../Card'
 import ContactButton from '../Home/ContactButton';
 import TransactionList from './TransactionList';
@@ -9,8 +10,31 @@ function Withdraw() {
   const auth = useAuth();
   const [show, setShow] = useState(true);
   const [withdraw, setWithdraw] = useState('');
-  const [currentBalance, setCurrentBalance] = useState(auth.user.balance);
+  const [currentBalance, setCurrentBalance] = useState('loading');
   const [isValid, setIsValid] = useState(false);
+  const [transactions, setTransactions] = useState([])
+
+  const getTransactions =  async () => {
+    const response = await transactionsAPI.all();
+    console.log('get API response',response.data);
+    setTransactions(response.data);
+  }
+
+  const getBalance = async () => {
+    const response = await transactionsAPI.balance(auth.auth.uid);
+    console.log('get balance', response.data)
+    setCurrentBalance(response.data.balance)
+  }
+
+  useEffect(() => {
+    getTransactions(); 
+    getBalance()
+  }, [])
+
+  let today = new Date();
+  let date = `${
+    today.getMonth() + 1
+  }-${today.getDate()}-${today.getFullYear()}`;
 
   const handleChange = (event) => {
     setWithdraw(Number(event.target.value));
@@ -23,7 +47,7 @@ function Withdraw() {
     }
   };
 
-  function handleWithdraw() {
+  async function handleWithdraw() {
     console.log(`withdrawal is ${withdraw}`);
     if (withdraw > currentBalance) {
       alert('Insufficient Funds');
@@ -31,10 +55,15 @@ function Withdraw() {
       return setIsValid(false);
     }
     let newBalance = currentBalance - withdraw;
-    auth.user.balance = newBalance;
     setCurrentBalance(newBalance);
-    saveTransaction(newBalance);
+    const response = await transactionsAPI.withdraw(date, withdraw, newBalance);
+    console.log(response);
+    setCurrentBalance(response.data.updateBalance.balance)
+    await getTransactions();
+  
+    
     setShow(false);
+    setWithdraw('');
     setIsValid(false);
   }
 
@@ -43,19 +72,19 @@ function Withdraw() {
     setShow(true);
   }
 
-  function saveTransaction(total) {
-    let today = new Date();
-    let date = `${
-      today.getMonth() + 1
-    }-${today.getDate()}-${today.getFullYear()}`;
-    let newTransaction = {
-      date: `${date}`,
-      amount: `$${withdraw}`,
-      type: 'Withdrawal',
-      balance: `$${total}`,
-    };
-    auth.user.transactions.push(newTransaction);
-  }
+  // function saveTransaction(total) {
+  //   let today = new Date();
+  //   let date = `${
+  //     today.getMonth() + 1
+  //   }-${today.getDate()}-${today.getFullYear()}`;
+  //   let newTransaction = {
+  //     date: `${date}`,
+  //     amount: `$${withdraw}`,
+  //     type: 'Withdrawal',
+  //     balance: `$${total}`,
+  //   };
+  //   auth.user.transactions.push(newTransaction);
+  // }
 
   return (
     <>
@@ -64,7 +93,7 @@ function Withdraw() {
         bgcolor='light'
         txtcolor='black'
         header='Withdraw Funds'
-        title={`Your balance is $${auth.user.balance}.`}
+        title={`Your balance is $${currentBalance}.`}
         body={
           show ? (
             <>
@@ -112,7 +141,7 @@ function Withdraw() {
           </tr>
         </thead>
         <tbody>
-          <TransactionList transactions={auth.user.transactions} />
+          <TransactionList transactions={transactions} />
         </tbody>
       </table>
       <ContactButton />

@@ -42,9 +42,16 @@ function CreateAccount() {
             .required('Required'),
         })}
         onSubmit={async (values, { setSubmitting }) => {
+          try {
           signup(values.name, values.email, values.password);
           setShow(false);
           setSubmitting(false);
+        }
+        catch (error) {
+          console.log('Please try again')
+
+        }
+
         }}
       >
         {({ isSubmitting, isValid }) => (

@@ -12,12 +12,17 @@ const service = axios.create({
 
 const transactionsAPI = {
   //deposit
-  deposit: (date, amount, balance) =>
-    service.post('/transactions/deposit', { date, amount, balance }),
+  deposit: async (date, amount, balance) => {
+    return service.post('/transactions/deposit', { date, amount, balance })
+  // (response => response.data)
+  },
   //withdraw
-  withdraw: (data) => service.post('/transactions/withdraw', data),
+  withdraw: async (date, amount, balance) => {
+    return service.post('/transactions/withdraw', { date, amount, balance })
+  },
   //show all transactions
-  all: () => service.get('/transactions/all'),
+  all: async () =>  await service.get('/transactions/all'),
+  balance: (id) => service.get(`/transactions/balance/${id}`)
 };
 
 const usersAPI = {

@@ -80,6 +80,14 @@ a {
   min-height: 100px;
 }
 
+.home {
+  margin-bottom: 1rem;
+}
+
+.home-text {
+  margin-bottom: 2px;
+}
+
 nav {
   background-color: #efaa9c !important;
 }
