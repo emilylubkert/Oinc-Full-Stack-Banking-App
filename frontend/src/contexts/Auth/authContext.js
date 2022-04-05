@@ -26,7 +26,7 @@ function AuthProvider({ children }) {
             setAuth(user);
             usersAPI.new({name, email, password, firebaseID});
             await firebase.login(email, password);
-            navigate('/dashboard');
+            // navigate('/dashboard');
             
         } catch (error){
             console.log(error)

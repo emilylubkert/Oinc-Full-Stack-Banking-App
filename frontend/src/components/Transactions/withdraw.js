@@ -15,7 +15,7 @@ function Withdraw() {
   const [transactions, setTransactions] = useState([])
 
   const getTransactions =  async () => {
-    const response = await transactionsAPI.all();
+    const response = await transactionsAPI.all(auth.auth?.uid);
     console.log('get API response',response.data);
     setTransactions(response.data);
   }

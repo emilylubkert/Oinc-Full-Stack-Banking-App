@@ -111,6 +111,10 @@ nav {
   padding-left: 0;
 }
 
+.success-button {
+  margin-right: .5rem;
+}
+
 .user-table {
   border-collapse: separate;
   border-spacing: 24px 0;

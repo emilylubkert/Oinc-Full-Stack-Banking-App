@@ -125,7 +125,6 @@ function CreateAccount() {
           ) : (
             <>
               <h5>Success!</h5>
-              <h6>Enjoy a $10 credit, just for signing up.</h6>
               <br />
               <div className='account-btns'>
                 <button
@@ -135,7 +134,7 @@ function CreateAccount() {
                 >
                   Add Another Account
                 </button>
-                <Link className='btn btn-dark' role='button' to='../dashboard'>
+                <Link className='btn btn-dark success-button' role='button' to='../dashboard'>
                   Go To Dashboard
                 </Link>
               </div>

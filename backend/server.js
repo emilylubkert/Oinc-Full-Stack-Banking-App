@@ -42,7 +42,7 @@ app.post('/account/create', async (req, res) => {
     name,
     email,
     password,
-    balance: 10,
+    balance: 0,
     firebaseID
   };
   try {
@@ -66,10 +66,11 @@ app.get('/account/all', async (req, res) => {
 });
 
 //dashboard - get users transactions
-app.get('/transactions/all', async (req, res) => {
+app.get('/transactions/all/:id', async (req, res) => {
+  const { id } = req.params;
   try {
     const transactions = await Transaction.find({
-      firebaseID: req.firebaseUser.uid
+      firebaseID: id
     });
     res.status(200).send(transactions);
   } catch (error) {

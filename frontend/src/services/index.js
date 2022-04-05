@@ -21,7 +21,7 @@ const transactionsAPI = {
     return service.post('/transactions/withdraw', { date, amount, balance })
   },
   //show all transactions
-  all: async () =>  await service.get('/transactions/all'),
+  all: async (id) =>  await service.get(`/transactions/all/${id}`),
   balance: (id) => service.get(`/transactions/balance/${id}`)
 };
 

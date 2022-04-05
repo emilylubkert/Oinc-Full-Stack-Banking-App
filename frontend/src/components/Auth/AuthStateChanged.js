@@ -19,7 +19,7 @@ const AuthStateChanged = ({ children }) => {
           localStorage.setItem('token', token)
         })
         setIsLoading(false)
-        navigate('/')
+        // navigate('/')
       } else {
         setIsLoading(false)
         navigate('/')

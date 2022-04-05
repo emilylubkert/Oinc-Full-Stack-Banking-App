@@ -16,11 +16,9 @@ function Dashboard() {
   // console.log(auth.currentUser);
 
   const getTransactions = async () => {
-    // setTimeout(async () => {
-      const response = await transactionsAPI.all();
+      const response = await transactionsAPI.all(auth.auth?.uid);
       console.log('get transactions', response.data);
       setTransactions(response.data);
-    // }, 5000);
   };
 
   const getBalance = async () => {
@@ -34,9 +32,6 @@ function Dashboard() {
     getBalance();
   }, []);
 
-  // useEffect(() => {
-  //   setTransactions([])
-  // }, [auth])
 
   return (
     <>
