@@ -14,6 +14,8 @@ const corsOptions = {
   ],
 }
 
+const PORT = process.env.PORT || 8080
+
 const app = express();
 
 app.use(cors(corsOptions));
@@ -21,8 +23,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-// const buildPath = path.normalize(path.join(__dirname, '../frontend/build'));
-// app.use(express.static(buildPath));
+app.use(express.static(path.join(__dirname, '../frontend/build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build'))
+})
 
 try {
   mongoose
@@ -54,16 +58,6 @@ app.post('/account/create', async (req, res) => {
 });
 
 app.use(authMiddleware);
-
-//get all accounts
-app.get('/account/all', async (req, res) => {
-  try {
-    const accounts = await User.find({});
-    res.status(200).send(accounts);
-  } catch (error) {
-    console.log(error);
-  }
-});
 
 //dashboard - get users transactions
 app.get('/transactions/all/:id', async (req, res) => {
@@ -143,6 +137,6 @@ app.post('/transactions/withdraw', async (req, res) => {
   }
 });
 
-app.listen(8080, () => {
-  console.log('Server running on port 8080');
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

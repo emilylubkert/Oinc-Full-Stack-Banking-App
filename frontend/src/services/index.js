@@ -32,9 +32,7 @@ const usersAPI = {
       email: data.email,
       password: data.password,
       firebaseID: data.firebaseID,
-    }),
-  //show all accounts
-  all: () => service.get('/account/all'),
+    })
 };
 
 export { transactionsAPI, usersAPI };
