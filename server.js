@@ -30,7 +30,9 @@ app.get('*', (req, res) => {
 try {
   mongoose
     .connect(process.env.MONGO_CONNECTION_STRING, {
-      useUnifiedTopology: true,
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useUnifiedTopology: true
     })
     .then(console.log('Connected successfully to db server!'));
 } catch (error) {
