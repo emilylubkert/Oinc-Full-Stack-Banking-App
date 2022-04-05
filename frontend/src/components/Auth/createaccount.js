@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useUsers } from '../../contexts/userContext';
 import { useAuth } from '../../contexts/Auth/authContext';
 import ContactButton from '../Home/ContactButton';
 import Logo from '../Home/Logo';
@@ -10,7 +9,6 @@ import Card from '../Card';
 import '../../components.css';
 
 function CreateAccount() {
-  const ctx = useUsers();
   const [show, setShow] = useState(true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -28,9 +26,9 @@ function CreateAccount() {
       <Formik
         validateOnMount
         initialValues={{
-          name: 'Chris',
-          email: 'chris@duke.edu',
-          password: '12345678',
+          name: '',
+          email: '',
+          password: '',
         }}
         validationSchema={Yup.object({
           name: Yup.string().required('Required'),

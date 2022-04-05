@@ -57,7 +57,7 @@ function Withdraw() {
     let newBalance = currentBalance - withdraw;
     setCurrentBalance(newBalance);
     const response = await transactionsAPI.withdraw(date, withdraw, newBalance);
-    console.log(response);
+    console.log('new withdraw response', response.data.newWithdraw);
     setCurrentBalance(response.data.updateBalance.balance)
     await getTransactions();
   
@@ -72,19 +72,6 @@ function Withdraw() {
     setShow(true);
   }
 
-  // function saveTransaction(total) {
-  //   let today = new Date();
-  //   let date = `${
-  //     today.getMonth() + 1
-  //   }-${today.getDate()}-${today.getFullYear()}`;
-  //   let newTransaction = {
-  //     date: `${date}`,
-  //     amount: `$${withdraw}`,
-  //     type: 'Withdrawal',
-  //     balance: `$${total}`,
-  //   };
-  //   auth.user.transactions.push(newTransaction);
-  // }
 
   return (
     <>

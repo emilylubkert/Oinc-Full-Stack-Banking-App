@@ -11,58 +11,25 @@ function Home() {
     <Logo>
       <Card
         txtcolor='black'
-        header='WELCOME TO OIN¢'
-        text={!auth.auth ? ('Tooth fairy coins,  money from grandma...') : null}
+        header={!auth.auth ? 'WELCOME TO OIN¢' : `Hi ${auth.auth?.displayName}`}
+        text={!auth.auth ? 'Tooth fairy coins,  money from grandma...' : null}
         body={
-          !auth.auth ? (
-            <>
-              <p>OIN¢ helps keep track of it all.</p>
-              <p>Let's get started.</p>
-              <div className='btn-container'>
-                <Link
-                  className='btn btn-info btn-lg'
-                  role='button'
-                  to='../createaccount'
-                >
-                  Create Account
-                </Link>
-                <Link
-                  className='btn btn-info btn-lg'
-                  role='button'
-                  to='../login'
-                >
-                  Log In
-                </Link>
-              </div>
-            </>
-          ) : (
-            <>
-              <p className='home-text'>See your account details.</p>
+          <>
+            <p>OIN¢ helps keep track of it all.</p>
+            <p>Let's get started.</p>
+            <div className='btn-container'>
               <Link
-                className='btn btn-info btn-lg home'
+                className='btn btn-info btn-lg'
                 role='button'
-                to='../dashboard'
+                to='../createaccount'
               >
-                Dashboard
+                Create Account
               </Link>
-              <p className='home-text'>Add money.</p>
-              <Link
-                className='btn btn-info btn-lg home'
-                role='button'
-                to='../deposit'
-              >
-                Deposit
+              <Link className='btn btn-info btn-lg' role='button' to='../login'>
+                Log In
               </Link>
-              <p className='home-text'>Take out money.</p>
-              <Link
-                className='btn btn-info btn-lg home'
-                role='button'
-                to='../withdraw'
-              >
-                Withdraw
-              </Link>
-            </>
-          )
+            </div>
+          </>
         }
       />
       <ContactButton />

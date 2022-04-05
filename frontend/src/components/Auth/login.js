@@ -6,7 +6,6 @@ import { useAuth } from '../../contexts/Auth/authContext';
 import Card from '../Card';
 import ContactButton from '../Home/ContactButton';
 import Logo from '../Home/Logo';
-import useProvideAuth from '../../hooks/useProvideAuth';
 import '../../components.css';
 
 function Login() {

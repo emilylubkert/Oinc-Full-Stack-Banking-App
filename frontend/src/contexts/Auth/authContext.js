@@ -1,8 +1,7 @@
 import { createContext, useContext, useState } from 'react';
-import { navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { updateProfile } from 'firebase/auth';
 import firebase from './firebaseConfig';
-import useProvideAuth from '../../hooks/useProvideAuth';
 import { usersAPI } from '../../services/index';
 
 const AuthContext = createContext(null);

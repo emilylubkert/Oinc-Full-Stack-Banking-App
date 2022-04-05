@@ -42,9 +42,6 @@ function Deposit() {
       alert('Deposit amount must be a positive number');
       setDeposit('');
       return setIsValid(false);
-    } else if (isNaN(deposit)) {
-      alert('Deposit amount must a number');
-      return setIsValid(false);
     } else {
       console.log('Valid Transaction');
       setIsValid(true);
@@ -53,12 +50,10 @@ function Deposit() {
 
   async function handleDeposit() {
     let newBalance = currentBalance + deposit;
-    // auth.balance = newBalance;
     setCurrentBalance(newBalance);
     console.log('current balance', newBalance)
-    // saveTransaction(newBalance);
     const response = await transactionsAPI.deposit(date, deposit, newBalance);
-    console.log(response);
+    console.log('new deposit response', response.data.newDeposit);
     setCurrentBalance(response.data.updateBalance.balance)
     await getTransactions();
     
@@ -72,20 +67,6 @@ function Deposit() {
     setDeposit('');
     setShow(true);
   }
-
-  // function saveTransaction(total) {
-
-  //   let newTransaction = {
-  //     date: `${date}`,
-  //     amount: `$${deposit}`,
-  //     // type: 'Deposit',
-  //     balance: `$${total}`,
-  //   };
-  //   transactions.push(newTransaction);
-    
-  // }
-
-
 
   return (
     <>

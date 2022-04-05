@@ -1,27 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Dashboard from './components/Transactions/dashboard';
-import CreateAccount from './components/Auth/createaccount';
-import Deposit from './components/Transactions/deposit';
-import Home from './components/Home/Home';
 import NavBar from './components/NavBar';
-import Login from './components/Auth/login';
-import Withdraw from './components/Transactions/withdraw';
+import Home from './components/Home/Home';
+import Contact from './components/Home/Contact';
+import Login from './components/Auth/Login';
+import CreateAccount from './components/Auth/Createaccount';
+import Dashboard from './components/Transactions/Dashboard';
+import Deposit from './components/Transactions/Deposit';
+import Withdraw from './components/Transactions/Withdraw';
 import AllData from './components/Alldata';
 import RequireAuth from './components/Auth/RequireAuth';
 import { AuthProvider } from './contexts/Auth/authContext';
-import { UserProvider } from './contexts/userContext';
 import { AuthStateChanged } from './components/Auth/AuthStateChanged';
-import Contact from './components/Home/Contact';
+
 
 function App() {
-  const [data, setData] = useState(null);
-
+  
   return (
     <Router>
-      <UserProvider>
         <AuthProvider>
           <AuthStateChanged>
           <NavBar />
@@ -44,7 +42,6 @@ function App() {
           </div>
           </AuthStateChanged>
         </AuthProvider>
-      </UserProvider>
     </Router>
   );
 }

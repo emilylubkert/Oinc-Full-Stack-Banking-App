@@ -1,14 +1,21 @@
 import { useState, useEffect } from 'react';
-import { useUsers } from '../contexts/userContext';
 import { useAuth } from '../contexts/Auth/authContext';
 import { usersAPI } from '../services/index';
 import Card from './Card';
 import '../components.css';
 
 function AllData() {
-  const ctx = useUsers();
   const [data, setData] = useState([]);
   const auth = useAuth();
+  
+  useEffect(() => {
+    usersAPI.all().then((response) => {
+      console.log(response.data);
+      setData(response.data);
+      console.log('data', data);
+      console.log('auth', auth.uid)
+    });
+  }, []);
 
   const UserList = ({ users }) => {
     const newRow = users.map((item, index) => {
@@ -23,15 +30,6 @@ function AllData() {
     });
     return newRow;
   };
-  //extract to service
-  useEffect(() => {
-    usersAPI.all().then((response) => {
-      console.log(response.data);
-      setData(response.data);
-      console.log('data', data);
-      console.log('auth', auth.uid)
-    });
-  }, []);
 
   return (
     <>
