@@ -32,6 +32,11 @@ function Dashboard() {
     getBalance();
   }, []);
 
+  useEffect(() => {
+    getTransactions(); 
+    getBalance()
+  }, [auth])
+
 
   return (
     <>

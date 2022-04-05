@@ -31,6 +31,11 @@ function Deposit() {
     getBalance()
   }, [])
 
+  useEffect(() => {
+    getTransactions(); 
+    getBalance()
+  }, [deposit])
+
   let today = new Date();
   let date = `${
     today.getMonth() + 1

@@ -31,6 +31,11 @@ function Withdraw() {
     getBalance()
   }, [])
 
+  useEffect(() => {
+    getTransactions(); 
+    getBalance()
+  }, [auth])
+
   let today = new Date();
   let date = `${
     today.getMonth() + 1

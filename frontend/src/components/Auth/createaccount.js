@@ -129,12 +129,12 @@ function CreateAccount() {
               <div className='account-btns'>
                 <button
                   type='submit'
-                  className='btn btn-dark'
+                  className='btn btn-dark success-button'
                   onClick={clearForm}
                 >
                   Add Another Account
                 </button>
-                <Link className='btn btn-dark success-button' role='button' to='../dashboard'>
+                <Link className='btn btn-dark' role='button' to='../dashboard'>
                   Go To Dashboard
                 </Link>
               </div>

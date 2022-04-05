@@ -58,6 +58,7 @@ function AuthProvider({ children }) {
             setAuth(null);
             localStorage.removeItem('token');
             navigate('/');
+            console.log('logout', auth)
         } catch {
 
         }
