@@ -121,20 +121,6 @@ function NavBar() {
                 Withdraw
               </NavLink>
             </li>
-
-            <li className='nav-item'>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? 'active-style' : 'none' + 'nav-NavLink'
-                }
-                to='/alldata'
-                data-toggle='tooltip'
-                data-placement='top'
-                title='View user data'
-              >
-                AllData
-              </NavLink>
-            </li>
           </ul>
         </div>
       </nav>

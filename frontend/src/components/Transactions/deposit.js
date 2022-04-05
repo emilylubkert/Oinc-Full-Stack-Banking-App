@@ -15,7 +15,7 @@ function Deposit() {
   const [transactions, setTransactions] = useState([])
 
   const getTransactions =  async () => {
-    const response = await transactionsAPI.all(auth.auth?.uid);
+    const response = await transactionsAPI.all(auth.auth.uid);
     console.log('get API response',response.data);
     setTransactions(response.data);
   }
@@ -53,7 +53,7 @@ function Deposit() {
     setCurrentBalance(newBalance);
     console.log('current balance', newBalance)
     const response = await transactionsAPI.deposit(date, deposit, newBalance);
-    console.log('new deposit response', response.data.newDeposit);
+    console.log('new deposit response', response.data);
     setCurrentBalance(response.data.updateBalance.balance)
     await getTransactions();
     

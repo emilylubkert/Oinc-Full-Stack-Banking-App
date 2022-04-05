@@ -110,6 +110,7 @@ app.post('/transactions/deposit', async (req, res) => {
     const updateBalance = await User.findOneAndUpdate(targetUser, newBalance, {
       new: true
     })
+    console.log('updateBalance', updateBalance)
     res.status(201).json({newDeposit, updateBalance});
   } catch (error) {
     console.log(error);
