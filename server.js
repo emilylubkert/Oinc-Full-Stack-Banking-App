@@ -86,18 +86,19 @@ app.get('/transactions/balance/:id', async (req, res) => {
 
 // deposit
 app.post('/transactions/deposit', async (req, res) => {
-  const { date, amount, balance } = req.body;
+  const { date, amount, balance, firebaseID } = req.body;
+  console.log('body', req.body)
   const deposit = {
     date,
     amount,
     type: 'Deposit',
     balance,
-    firebaseID: req.firebaseUser.uid
+    firebaseID
   };
   try {
     console.log('deposit', deposit);
     const newDeposit = await Transaction.create(deposit);
-    const targetUser = {firebaseID: req.firebaseUser.uid}
+    const targetUser = {firebaseID: firebaseID}
     console.log('targetUser', targetUser)
     const newBalance = {balance: deposit.balance}
     console.log('newBalance', newBalance)
@@ -113,18 +114,18 @@ app.post('/transactions/deposit', async (req, res) => {
 
 //withdraw
 app.post('/transactions/withdraw', async (req, res) => {
-  const { date, amount, balance } = req.body;
+  const { date, amount, balance, firebaseID } = req.body;
   const withdraw = {
     date,
     amount,
     type: 'Withdrawal',
     balance,
-    firebaseID: req.firebaseUser.uid,
+    firebaseID,
   };
   try {
     console.log('withdraw', withdraw);
     const newWithdraw = await Transaction.create(withdraw);
-    const targetUser = {firebaseID: req.firebaseUser.uid}
+    const targetUser = {firebaseID: firebaseID}
     console.log('targetUser', targetUser)
     const newBalance = {balance: withdraw.balance}
     console.log('newBalance', newBalance)

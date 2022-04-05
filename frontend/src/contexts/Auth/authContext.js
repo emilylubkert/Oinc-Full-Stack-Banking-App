@@ -4,7 +4,7 @@ import { updateProfile } from 'firebase/auth';
 import firebase from './firebaseConfig';
 import { usersAPI } from '../../services/index';
 
-const AuthContext = createContext(null);
+const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
     const [auth, setAuth] = useState(null);
@@ -59,8 +59,8 @@ function AuthProvider({ children }) {
             localStorage.removeItem('token');
             navigate('/');
             console.log('logout', auth)
-        } catch {
-
+        } catch (error){
+            console.log(error);
         }
     }
     

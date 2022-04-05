@@ -34,7 +34,7 @@ function Deposit() {
   useEffect(() => {
     getTransactions(); 
     getBalance()
-  }, [deposit])
+  }, [auth])
 
   let today = new Date();
   let date = `${
@@ -57,7 +57,7 @@ function Deposit() {
     let newBalance = currentBalance + deposit;
     setCurrentBalance(newBalance);
     console.log('current balance', newBalance)
-    const response = await transactionsAPI.deposit(date, deposit, newBalance);
+    const response = await transactionsAPI.deposit(date, deposit, newBalance, auth.auth.uid);
     console.log('new deposit response', response.data);
     setCurrentBalance(response.data.updateBalance.balance)
     await getTransactions();

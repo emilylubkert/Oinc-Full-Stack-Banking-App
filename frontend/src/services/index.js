@@ -12,12 +12,12 @@ const service = axios.create({
 
 const transactionsAPI = {
   //deposit
-  deposit: (date, amount, balance) => {
-    return service.post('/transactions/deposit', { date, amount, balance })
+  deposit: (date, amount, balance, firebaseID) => {
+    return service.post('/transactions/deposit', { date, amount, balance, firebaseID })
   },
   //withdraw
-  withdraw: (date, amount, balance) => {
-    return service.post('/transactions/withdraw', { date, amount, balance })
+  withdraw: (date, amount, balance, firebaseID) => {
+    return service.post('/transactions/withdraw', { date, amount, balance, firebaseID })
   },
   //show all transactions
   all: (id) =>  service.get(`/transactions/all/${id}`),

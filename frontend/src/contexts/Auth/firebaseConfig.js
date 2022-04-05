@@ -24,7 +24,8 @@ const user = auth.currentUser;
 
 
 const firebase = {
-    signup: (email, password) => createUserWithEmailAndPassword(auth, email, password)
+    signup: (email, password) => 
+    createUserWithEmailAndPassword(auth, email, password)
     .then(console.log('current user', user)),
     login: (email, password) => signInWithEmailAndPassword(auth, email, password),
     logout: () => signOut(auth),

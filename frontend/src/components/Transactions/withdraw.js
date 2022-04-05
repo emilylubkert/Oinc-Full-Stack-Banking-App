@@ -61,8 +61,8 @@ function Withdraw() {
     }
     let newBalance = currentBalance - withdraw;
     setCurrentBalance(newBalance);
-    const response = await transactionsAPI.withdraw(date, withdraw, newBalance);
-    console.log('new withdraw response', response.data.newWithdraw);
+    const response = await transactionsAPI.withdraw(date, withdraw, newBalance, auth.auth.uid);
+    console.log('new withdraw response', response.data);
     setCurrentBalance(response.data.updateBalance.balance)
     await getTransactions();
   
