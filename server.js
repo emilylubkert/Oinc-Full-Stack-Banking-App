@@ -29,11 +29,7 @@ app.get('*', (req, res) => {
 
 try {
   mongoose
-    .connect(process.env.MONGO_CONNECTION_STRING, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedTopology: true
-    })
+    .connect(process.env.MONGO_CONNECTION_STRING)
     .then(console.log('Connected successfully to db server!'));
 } catch (error) {
   console.log(error);
