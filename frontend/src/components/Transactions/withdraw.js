@@ -16,13 +16,11 @@ function Withdraw() {
 
   const getTransactions =  async () => {
     const response = await transactionsAPI.all(auth.auth?.uid);
-    console.log('get API response',response.data);
     setTransactions(response.data);
   }
 
   const getBalance = async () => {
     const response = await transactionsAPI.balance(auth.auth.uid);
-    console.log('get balance', response.data)
     setCurrentBalance(response.data.balance)
   }
 
@@ -30,11 +28,6 @@ function Withdraw() {
     getTransactions(); 
     getBalance()
   }, [])
-
-  useEffect(() => {
-    getTransactions(); 
-    getBalance()
-  }, [auth])
 
   let today = new Date();
   let date = `${
@@ -53,7 +46,6 @@ function Withdraw() {
   };
 
   async function handleWithdraw() {
-    console.log(`withdrawal is ${withdraw}`);
     if (withdraw > currentBalance) {
       alert('Insufficient Funds');
       setWithdraw('');
@@ -62,11 +54,9 @@ function Withdraw() {
     let newBalance = currentBalance - withdraw;
     setCurrentBalance(newBalance);
     const response = await transactionsAPI.withdraw(date, withdraw, newBalance, auth.auth.uid);
-    console.log('new withdraw response', response.data);
     setCurrentBalance(response.data.updateBalance.balance)
     await getTransactions();
   
-    
     setShow(false);
     setWithdraw('');
     setIsValid(false);
@@ -81,7 +71,6 @@ function Withdraw() {
   return (
     <>
       <Card
-        
         bgcolor='light'
         txtcolor='black'
         header='Withdraw Funds'

@@ -32,7 +32,6 @@ try {
 
 //create user
 app.post('/account/create', async (req, res) => {
-  console.log('request body', req.body);
   const { name, email, password, firebaseID } = req.body;
   const user = {
     name,
@@ -84,7 +83,6 @@ app.get('/transactions/balance/:id', async (req, res) => {
 // deposit
 app.post('/transactions/deposit', async (req, res) => {
   const { date, amount, balance, firebaseID } = req.body;
-  console.log('body', req.body)
   const deposit = {
     date,
     amount,
@@ -93,16 +91,12 @@ app.post('/transactions/deposit', async (req, res) => {
     firebaseID
   };
   try {
-    console.log('deposit', deposit);
     const newDeposit = await Transaction.create(deposit);
     const targetUser = {firebaseID: firebaseID}
-    console.log('targetUser', targetUser)
     const newBalance = {balance: deposit.balance}
-    console.log('newBalance', newBalance)
     const updateBalance = await User.findOneAndUpdate(targetUser, newBalance, {
       new: true
     })
-    console.log('updateBalance', updateBalance)
     res.status(201).json({newDeposit, updateBalance});
   } catch (error) {
     console.log(error);
@@ -120,12 +114,9 @@ app.post('/transactions/withdraw', async (req, res) => {
     firebaseID,
   };
   try {
-    console.log('withdraw', withdraw);
     const newWithdraw = await Transaction.create(withdraw);
     const targetUser = {firebaseID: firebaseID}
-    console.log('targetUser', targetUser)
     const newBalance = {balance: withdraw.balance}
-    console.log('newBalance', newBalance)
     const updateBalance = await User.findOneAndUpdate(targetUser, newBalance, {
       new: true
     })

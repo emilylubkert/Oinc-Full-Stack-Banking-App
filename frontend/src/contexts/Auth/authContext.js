@@ -13,20 +13,16 @@ function AuthProvider({ children }) {
     const signup = async (name, email, password) => {
         try {
             const userCredential = await firebase.signup(email, password)
-            console.log('userCredential', userCredential);
             const { user } = userCredential;
             const firebaseID = user.uid;
             updateProfile(user, { displayName: name })
-            console.log(user.displayName); 
 
             user.getIdToken().then(token => {
                 localStorage.setItem('token', token)
-                console.log('token', token)
             })
             setAuth(user);
             usersAPI.new({name, email, password, firebaseID});
             await firebase.login(email, password);
-            // navigate('/dashboard');
             
         } catch (error){
             console.log(error)
@@ -36,15 +32,12 @@ function AuthProvider({ children }) {
     const login = async (email, password) => {
         try {
             const userCredential = await firebase.login(email, password);
-            console.log('log in', userCredential);
             const { user } = userCredential;
-            console.log(user.displayName); 
 
             user.getIdToken().then(token => {
                 localStorage.setItem('token', token)
             })
             setAuth(user);
-            console.log('user', user)
             navigate('/dashboard');
 
         } catch (error){
@@ -58,7 +51,6 @@ function AuthProvider({ children }) {
             setAuth(null);
             localStorage.removeItem('token');
             navigate('/');
-            console.log('logout', auth)
         } catch (error){
             console.log(error);
         }

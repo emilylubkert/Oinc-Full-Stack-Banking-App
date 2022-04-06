@@ -11,15 +11,12 @@ const AuthStateChanged = ({ children }) => {
 
   useEffect(() => {
     firebase.getCurrentUser(user => {
-    //   console.log('my anonymous function', user)
       if (user) {
         setAuth(user)
         user.getIdToken().then(token => {
-        //   console.log('settingtoken authstatechanged')
           localStorage.setItem('token', token)
         })
         setIsLoading(false)
-        // navigate('/')
       } else {
         setIsLoading(false)
         navigate('/')

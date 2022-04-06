@@ -10,20 +10,14 @@ function Dashboard() {
   const auth = useAuth();
   const [transactions, setTransactions] = useState([]);
   const [currentBalance, setCurrentBalance] = useState('loading');
-  // const auth = useAuth();
-  console.log('current user', auth.auth.displayName);
-  // const auth = getAuth;
-  // console.log(auth.currentUser);
 
   const getTransactions = async () => {
-      const response = await transactionsAPI.all(auth.auth?.uid);
-      console.log('get transactions', response.data);
-      setTransactions(response.data);
+    const response = await transactionsAPI.all(auth.auth?.uid);
+    setTransactions(response.data);
   };
 
   const getBalance = async () => {
     const response = await transactionsAPI.balance(auth.auth?.uid);
-    console.log('get balance', response.data.name, response.data.balance);
     setCurrentBalance(response.data.balance);
   };
 
@@ -31,12 +25,6 @@ function Dashboard() {
     getTransactions();
     getBalance();
   }, []);
-
-  useEffect(() => {
-    getTransactions(); 
-    getBalance()
-  }, [auth])
-
 
   return (
     <>

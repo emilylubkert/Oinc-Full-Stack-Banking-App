@@ -16,13 +16,11 @@ function Deposit() {
 
   const getTransactions =  async () => {
     const response = await transactionsAPI.all(auth.auth.uid);
-    console.log('get API response',response.data);
     setTransactions(response.data);
   }
 
   const getBalance = async () => {
     const response = await transactionsAPI.balance(auth.auth.uid);
-    console.log('get balance', response.data)
     setCurrentBalance(response.data.balance)
   }
 
@@ -30,11 +28,6 @@ function Deposit() {
     getTransactions(); 
     getBalance()
   }, [])
-
-  useEffect(() => {
-    getTransactions(); 
-    getBalance()
-  }, [auth])
 
   let today = new Date();
   let date = `${
@@ -48,7 +41,6 @@ function Deposit() {
       setDeposit('');
       return setIsValid(false);
     } else {
-      console.log('Valid Transaction');
       setIsValid(true);
     }
   }
@@ -56,13 +48,10 @@ function Deposit() {
   async function handleDeposit() {
     let newBalance = currentBalance + deposit;
     setCurrentBalance(newBalance);
-    console.log('current balance', newBalance)
     const response = await transactionsAPI.deposit(date, deposit, newBalance, auth.auth.uid);
-    console.log('new deposit response', response.data);
     setCurrentBalance(response.data.updateBalance.balance)
     await getTransactions();
     
-
     setShow(false);
     setDeposit('');
     setIsValid(false);

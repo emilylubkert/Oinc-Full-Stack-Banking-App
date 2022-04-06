@@ -14,7 +14,7 @@ function CreateAccount() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { auth, signup } = useAuth();
+  const { signup } = useAuth();
 
   let today = new Date();
   let date = `${
