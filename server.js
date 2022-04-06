@@ -22,8 +22,6 @@ app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
-
 try {
   mongoose
     .connect(process.env.MONGO_CONNECTION_STRING)
@@ -134,7 +132,7 @@ app.post('/transactions/withdraw', async (req, res) => {
 
 app.use(express.static(path.join(__dirname, './frontend/build')))
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './frontend/build', 'index.html'))
+  res.sendFile(path.join(__dirname, './frontend/build/index.html'))
 })
 
 app.listen(PORT, () => {
