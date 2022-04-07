@@ -17,7 +17,6 @@ const AuthStateChanged = ({ children }) => {
           localStorage.setItem('token', token)
         })
         setIsLoading(false)
-        console.log('current user', firebase.getCurrentUser())
       } else {
         setIsLoading(false)
         navigate('/')

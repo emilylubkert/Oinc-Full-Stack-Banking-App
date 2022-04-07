@@ -47,8 +47,6 @@ app.post('/account/create', async (req, res) => {
   }
 });
 
-
-
 // app.use(authMiddleware);
 
 //dashboard - get users transactions
