@@ -47,12 +47,9 @@ app.post('/account/create', async (req, res) => {
   }
 });
 
-app.use(express.static(path.join(__dirname, './frontend/build')))
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './frontend/build/index.html'))
-})
 
-app.use(authMiddleware);
+
+// app.use(authMiddleware);
 
 //dashboard - get users transactions
 app.get('/transactions/all/:id', async (req, res) => {
@@ -125,7 +122,10 @@ app.post('/transactions/withdraw', async (req, res) => {
   }
 });
 
-
+app.use(express.static(path.join(__dirname, './frontend/build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './frontend/build/index.html'))
+})
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

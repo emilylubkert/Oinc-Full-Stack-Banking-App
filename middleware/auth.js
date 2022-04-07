@@ -2,8 +2,7 @@ const firebase = require('../config/firebase')
 
 const authMiddleware = async (req, res, next) => {
     if(!req.headers.authorization) {
-        // res.status(403).json({message: 'No token provided'})
-        return next ()
+        res.status(403).json({message: 'No token provided'})
     }
     const token = req.headers.authorization?.split(' ')[1];
     try {
