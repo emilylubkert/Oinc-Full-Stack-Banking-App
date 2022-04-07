@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react'
-import { onAuthStateChanged } from 'firebase/auth'
 import { AuthContext } from '../../contexts/Auth/authContext'
 import firebase from '../../contexts/Auth/firebaseConfig'
 import { useNavigate } from 'react-router-dom'
@@ -11,7 +10,7 @@ const AuthStateChanged = ({ children }) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.getCurrentUser(user => {
       if (user) {
         setAuth(user)
         user.getIdToken().then(token => {

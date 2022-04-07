@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './frontend/build/index.html'))
 })
 
-app.use(authMiddleware);
+// app.use(authMiddleware);
 
 //dashboard - get users transactions
 app.get('/transactions/all/:id', async (req, res) => {
