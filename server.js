@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
@@ -15,8 +16,6 @@ const corsOptions = {
 }
 
 const PORT = process.env.PORT || 8080
-
-const app = express();
 
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -47,6 +46,11 @@ app.post('/account/create', async (req, res) => {
     console.log(error);
   }
 });
+
+app.use(express.static(path.join(__dirname, './frontend/build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './frontend/build/index.html'))
+})
 
 app.use(authMiddleware);
 
@@ -121,10 +125,7 @@ app.post('/transactions/withdraw', async (req, res) => {
   }
 });
 
-app.use(express.static(path.join(__dirname, './frontend/build')))
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './frontend/build/index.html'))
-})
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
