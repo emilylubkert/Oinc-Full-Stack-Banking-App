@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const mongooseDateFormat = require('mongoose-date-format');
+const mongooseDateFormat = require('./mongoose-date-format');
 
 const transactionSchema = new mongoose.Schema(
     {
