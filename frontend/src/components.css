@@ -118,8 +118,9 @@ nav {
 .user-table {
   border-collapse: separate;
   border-spacing: 24px 0;
-  width: 100%;
+  width: 60%;
   text-align: left;
+  background-color: #ede8ea;
 }
 
 td {
