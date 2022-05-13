@@ -11,6 +11,7 @@ Users can create an account and enter withdrawals and/or deposits, which are kep
 - Add additional transaction details, like a note/description
 - Add user profile component
 - Add different types of accounts (e.g., guardian and child) with different capabilities (e.g., guardians can manage multiple child accounts)
+- Add additional sign-on methods
 
 ## Contact Me
 Please send any questions or feedback to elubkert@gmail.com
