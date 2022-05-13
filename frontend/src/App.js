@@ -13,6 +13,7 @@ import Withdraw from './components/Transactions/Withdraw';
 import RequireAuth from './components/Auth/RequireAuth';
 import { AuthProvider } from './contexts/Auth/authContext';
 import { AuthStateChanged } from './components/Auth/AuthStateChanged';
+import UserProfile from './components/Auth/UserProfile';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
                 <Route path='/dashboard/' element={<Dashboard />} />
                 <Route path='/deposit/' element={<Deposit />} />
                 <Route path='/withdraw/' element={<Withdraw />} />
+                <Route path='/userprofile/' element={<UserProfile />} />
               </Route>
 
             </Routes>

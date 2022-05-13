@@ -47,6 +47,19 @@ app.post('/account/create', async (req, res) => {
   }
 });
 
+//get current user
+app.get('/account/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const currentUser = await User.find({
+      firebaseID: id
+    });
+    res.status(200).send(currentUser);
+  } catch (error) {
+    res.status(404).json({ message: 'Bad request' })
+  }
+})
+
 // app.use(authMiddleware);
 
 //dashboard - get users transactions
@@ -120,10 +133,10 @@ app.post('/transactions/withdraw', async (req, res) => {
   }
 });
 
-app.use(express.static(path.join(__dirname, './frontend/build')))
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './frontend/build/index.html'))
-})
+// app.use(express.static(path.join(__dirname, './frontend/build')))
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, './frontend/build/index.html'))
+// })
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

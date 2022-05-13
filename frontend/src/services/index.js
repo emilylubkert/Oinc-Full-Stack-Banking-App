@@ -2,13 +2,13 @@ import axios from 'axios';
 
 const token = localStorage.getItem('token');
 
-const baseURL = process.env.REACT_APP_API_URL;
-// const baseURL = 'http://localhost:8080'
+// const baseURL = process.env.REACT_APP_API_URL;
+const baseURL = 'http://localhost:8080'
 const service = axios.create({
-  // baseURL,
+  baseURL,
   headers: {
     Authorization: `Bearer ${token}`,
-    // 'Access-Control-Allow-Credentials': 'true'
+    'Access-Control-Allow-Credentials': 'true'
   },
 });
 
@@ -34,7 +34,9 @@ const usersAPI = {
       email: data.email,
       password: data.password,
       firebaseID: data.firebaseID,
-    })
+    }),
+    //get current user info
+    getUser: (id) => service.get(`/account/${id}`)
 };
 
 export { transactionsAPI, usersAPI };
